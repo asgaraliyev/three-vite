@@ -15,7 +15,6 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 camera.rotation.order = 'YXZ';
-
 const ambientlight = new THREE.AmbientLight(0x6688cc);
 scene.add(ambientlight);
 
@@ -72,7 +71,7 @@ for (let i = 0; i < NUM_SPHERES; i++) {
   const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
   sphere.castShadow = true;
   sphere.receiveShadow = true;
- 
+
   scene.add(sphere);
 
   spheres.push({
@@ -196,10 +195,8 @@ function controls(deltaTime) {
 }
 
 const loader = new GLTFLoader().setPath('./models/gltf/');
-
 loader.load('collision-world.glb', (gltf) => {
   scene.add(gltf.scene);
-
   worldOctree.fromGraphNode(gltf.scene);
 
   gltf.scene.traverse((child) => {
@@ -212,13 +209,10 @@ loader.load('collision-world.glb', (gltf) => {
       }
     }
   });
-
   animate();
 });
-
 function animate() {
   const deltaTime = 0.0029;
-
   for (let i = 0; i < STEPS_PER_FRAME; i++) {
     controls(deltaTime);
 
